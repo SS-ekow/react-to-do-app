@@ -15,6 +15,7 @@ function App() {
     {id: 2, title: "Task 2", completed: false}
     
   ]); 
+  const deletedTasks = [];
 
   // Temp State
   const [newTask, setnewTask] = useState("");
@@ -35,11 +36,27 @@ const addTask = () => {
 
 
 // Delete Task
-const deleteTask = (id) => {};  
+const deleteTask = (id) => {
+  let newTasks = toDo.filter(task => task.id !== id);
+  let deleted = toDo.filter(task => task.id === id);
+  setToDo(newTasks);
+  deletedTasks.push(deleted)
+  console.log(deletedTasks);
+
+}
 
 
 // mark as completed
-const markDone = (id) => {};
+const markDone = (id) => {
+
+  let newTask = toDo.map(task => {
+    if(task.id === id){
+      return ({...task, completed: !task.completed})
+    }
+    return task;
+  })
+  setToDo(newTask);
+};
 
 //cancel update 
 const cancelUpdate = () => {};
@@ -77,7 +94,7 @@ const updateTask = () => {};
     </div>
     <br />
 
-
+ 
 
     {/* Add task */}
     <div className="row">
@@ -113,13 +130,22 @@ const updateTask = () => {};
 
             </div>
             <div className="iconsWrap">
-              <span title='completed/ not completed'>
+              <span title='completed/ not completed'
+              onClick = {()=> markDone(task.id)}
+              
+              >
                 <FontAwesomeIcon icon={faCircleCheck} onClick={()=>markDone(task.id)} />
               </span>
-              <span title="edit">
+
+              {task.completed ? null : (
+                <span title="edit">
                 <FontAwesomeIcon icon={faPen} onClick={()=>changeTask(task.id)}/>
               </span>
-              <span title='Delete'>
+              )}
+              
+              <span title='Delete'
+              onClick = {()=> deleteTask(task.id)}
+              >
                 <FontAwesomeIcon icon={faTrashCan} onClick={()=>deleteTask(task.id)}/>
               </span>
 
