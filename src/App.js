@@ -15,7 +15,7 @@ function App() {
     {id: 2, title: "Task 2", completed: false}
     
   ]); 
-  const deletedTasks = [];
+
 
   // Temp State
   const [newTask, setnewTask] = useState("");
@@ -38,10 +38,8 @@ const addTask = () => {
 // Delete Task
 const deleteTask = (id) => {
   let newTasks = toDo.filter(task => task.id !== id);
-  let deleted = toDo.filter(task => task.id === id);
   setToDo(newTasks);
-  deletedTasks.push(deleted)
-  console.log(deletedTasks);
+
 
 }
 
@@ -59,13 +57,28 @@ const markDone = (id) => {
 };
 
 //cancel update 
-const cancelUpdate = () => {};
+const cancelUpdate = () => {
+  setUpdateData('');
+};
 
 // change task 
-const changeTask = (e) => {};
+const changeTask = (e) => {
+  let newEntry = {
+    id: updateData.id,
+    title: e.target.value,
+    completed: updateData.completed ? true: false
+
+  }
+  setUpdateData(newEntry)
+};
 
 // update task
-const updateTask = () => {};
+const updateTask = () => {
+  let filtered = [...toDo].filter(task => task.id !== updateData.id);
+  let updatedObject = [...filtered, updateData];
+  setToDo(updatedObject);
+  setUpdateData('');
+};
 
 
 
@@ -79,11 +92,16 @@ const updateTask = () => {};
     {/* update task */}
     <div className="row">
       <div className="col">
-        <input type="text" className="form-control form-control-lg" />
+        <input 
+        value = {updateData && updateData.title}
+        onChange={(e)=> changeTask(e) }
+        type="text" className="form-control form-control-lg" />
 
       </div>
       <div className="col-auto">
-        <button className="btn btn-success">
+        <button className="btn btn-success"
+        onClick= {updateTask}
+        >
           <FontAwesomeIcon icon={faPen} />
           Update 
         </button>
@@ -138,7 +156,13 @@ const updateTask = () => {};
               </span>
 
               {task.completed ? null : (
-                <span title="edit">
+                <span title="edit"
+                onClick={()=> setUpdateData(
+                  {id: task.id,
+                  title: task.title,
+                  completed: task.completed ? true: false}
+                )}
+                >
                 <FontAwesomeIcon icon={faPen} onClick={()=>changeTask(task.id)}/>
               </span>
               )}
