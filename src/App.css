@@ -3,8 +3,9 @@
 }
 
 body{
-  background-color: darkgray;
+  background-color: #132E32;
   color: white;
+  font-family: monospace;
 }
 
 .taskNumber{
@@ -24,7 +25,7 @@ body{
 }
 
 .taskBg{
-  background-color: #555;
+  background-color: #1A181B;
   border-radius: 6px;
   margin-bottom: 20px;
   padding: 10px 140px 10 px 15px;
@@ -39,10 +40,17 @@ body{
   
 
 }
+
 .taskBg .taskText{
   flex: 1;
   margin-right: 20px;
 
+}
+
+.taskBg .done{
+  background-color: #00C49A;
+  color: white;
+  border-radius: 6px;
 }
 
 .taskBg .done .taskText{
@@ -65,10 +73,27 @@ body{
   display: inline-block;
   margin: 0 10px 0 10px;
   cursor: pointer;
-  color: #00ff89;
+  color: #9CFC97;
 }
 
 .taskBg .iconsWrap span:hover{
-  color: yellow;
+  color: #E3E36A;
 }
+
+
+.btn{
+  margin-right: 4px;
+
+
+}
+
+.App{
+  background-color: black;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 10px 30px 10px 0 #201b1b;
+}
+
+
 
