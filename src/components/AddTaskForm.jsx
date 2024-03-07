@@ -9,14 +9,16 @@ const AddTaskForm = ({newTask, setnewTask, addTask}) => {
             <div className="row">
             <div className="col">
                 <input 
+                
                 value = {newTask}
                 onChange={(e)=>setnewTask(e.target.value)}
-                type="text" className="form-control form-control-lg" />
+                type="text" className="form-control form-control-lg" spellCheck="true"/>
             </div>
             <div className="col-auto">
                 <button 
                 onClick ={addTask}
-                className="btn btn-lg btn-success">
+                className="btn btn-lg btn-success" >
+                
                 <FontAwesomeIcon icon={faPlus} />
                 Add Task
 

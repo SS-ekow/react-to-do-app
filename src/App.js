@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import AddTaskForm from './components/AddTaskForm.jsx';
 import UpdateFrom from './components/UpdateForm.jsx';
@@ -20,6 +20,16 @@ function App() {
   // Temp State (note: use to write deleted logic)
   const [newTask, setnewTask] = useState("");
   const [updateData, setUpdateData] = useState("");
+
+  useEffect(()=>{
+    const data = window.localStorage.getItem('my_toDo');
+    if(data!== null){ setToDo(JSON.parse(data))};
+
+  }, [])
+
+  useEffect(()=>{
+    window.localStorage.setItem('my_toDo', JSON.stringify(toDo));
+  }, [ toDo]);
 
 // Add Task
 const addTask = () => {

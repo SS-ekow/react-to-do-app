@@ -10,7 +10,7 @@ const UpdateForm = ({updateData, changeTask, updateTask, cancelUpdate}) => {
           <input
           value = {updateData && updateData.title}
           onChange={(e)=> changeTask(e)}
-          className="form-control form-control-lg" />
+          className="form-control form-control-lg" spellCheck="true" />
 
         </div>
         <div className="col-auto">
